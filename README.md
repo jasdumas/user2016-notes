@@ -1,5 +1,5 @@
 # user2016-notes
-Notes for tutorials and sessions at useR! 2016 Conference 
+Notes for tutorials and sessions at useR! 2016 Conference
 
 The R User Conference 2016    
 Monday, June 27 - Thursday, June 30 2016      
@@ -13,10 +13,82 @@ ____
 
 ## Monday
 
+Machine Learning Algorithmic Deep Dive
+* [repo](https://github.com/ledell/useR-machine-learning-tutorial)
+* Leg 1: Decision trees, Random Forest, GBM
+  * Install R kernal from Terminal not RStudio
+  * Practical topics related to each of the algorithms:
+  * class imbalance: ML algorithms use 'accuracy' for optimization which can be problematic since it is not performing as intended. i.e. Fraud data
+  * Sparsity, dimensionality, normalization, overfit...
+
+* Decision Tree: Classification and Regression Tree (CART)
+  * good for: large data, mixed predictors, surrogate splits
+  * sometimes overly used since they are easy to interpret
+  * tree algorithms: ID3, **C4.5, C5.0**
+  * splitting criterion: Gini, information-based used by C4.5
+  * missing values through surrogate splits - software concerns
+  * R package: *rpart*   
+
+* Random Forest:
+  * An application of decision trees, this takes models and **ensemble's** them together.
+  * Easy to parallelize since the trees don't know about each other.
+  * randomness comes from subset features/variables; bagging is short for bootstrap aggregating. Randomness helps de-correlate the trees
+  * automatically get a an estimate of the generalization error (out-of-bag sample). Also get variable importance through permutations (how often does the variable get chosen)
+  * can't overfit by adding trees, just adds computation time.
+  * can overfit by increasing tree depth.
+  * extremely randomized trees randomly selects how splits are computed
+  * R package(s): *extraTrees*, for extremely randomized trees, another available in *h2o::randomForest* package, *randomForest*, *DistributedR*, *party::cForest*, *ranger* good with high dimensionality datasets, *Rborist*. Just find the optimal package based on the data benchmarking!
+
+* Gradient Boosting Machines (GBM)
+  * good for: many types of data -> potentially better than Random Forest.
+  * An ensemble of weak prediction models
+  * Iterative algorithm by allowing optimization of an arbitrary differential loss function.
+  * AdaBoost algorithm: up-weight poor training results so that more attention can be paid for the next round
+  * GBM focuses on the gradient of the loss function which is a shift in mindset.
+  * Stochastic GBM: add randomness!
+  * xgboost and H20 implementations GBM of have per-tree column and row sampling parameters which is the cause winning kaggle competitions usage.
+  * GBM trees: should be "shrubs" or "stumps" aka shorter trees than Random Forest.
+  * R package(s): *gbm*, *xgboost*
+
+* Generalized Linear Model (GLM)
+  * consider the distribution and response
+  * training a GLM find coefficients that minimize the residual sum of squares (RSS)
+  * "matrix inverse is not a good place to be at" - Erin LeDell
+  * Gloss?  - link R to optimize basic core math to speed up glm's
+  * Different solvers: Iteratively Re-weight Least squares with ADMM, Cyclical coordinate descent, Limited memory-BFGS optimization algorithm = butter knife approach
+  * GLM `predict()` error for finding new factors when applying fit to test data. It get encoded as not there
+  * Ridge Regression: constraints square sum of squares of beta coefficients
+    * L2 regularization: useful for preventing overfitting
+    * good for: little bit of noise
+  * LASSO (L1 Regularization)
+    * good for: feature selection in a sparse matrix -> zero out coefficients
+  * Elastic Net = Ridge + LASSO
+  * R package(s): *speedglm*, *glmnet* uses cyclical coordinate descent for LASSO and Ridge, *caret::train* has a nice interface, *h20.glm* set lambda = 0 to remove default regularization.
+
+* Deep Neural Networks
+  * neural network with (multiple hidden layers): a bunch of linear models stitched together - can abstract higher dimensional features out of the data (spend less time on feature engineering and more time on parameter tuning)
+  * iterations = epics (early stopping point in *h20* library)
+  * sparse data should be run with neural nets and glm's not trees
+  * use gridsearch to find parameters.
+  * HOGWILD! method
+  * difficult to know architecture structure up front -> parameter tune which is difficult (activation, regularization, drop-out)
+  * multilayer perception or feed-forward artificial neural networks (ANN)
+  * recurrent neural networks (RNN) has internal memory. good for: sequence learners (i.e. bots on twitter)
+  * convolution neural networks (CNN): good for images. (i.e. trippy images from google!)
+  * R package(s): *mxnet* has GPU support and can have specified output, *h20* has support for exponential families.
+
+* DO EVERYTHING: Stacking
+  * ensemble learning: combine models together with a machine learning algorithm ("METAlearner").
+  * good for: not knowing what will work in advance or you don't care what algorithm to use
+  * bad: takes longer and not as much software and ecosystem to do stacking.
+  * Super Learner == Stacking
+    * set-up ensemble
+    * train ensemble: k-cross fold validation for base learners
+  * R package(s): *SuperLearner*, *subsemble* faster alternative, *h20Ensemble* supports regression and binary classification 
+
+
 ## Tuesday
 
 ## Wednesday
 
 ## Thursday
-
-
