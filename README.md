@@ -50,6 +50,8 @@ Machine Learning Algorithmic Deep Dive
   * GBM trees: should be "shrubs" or "stumps" aka shorter trees than Random Forest.
   * R package(s): *gbm*, *xgboost*
 
+* Leg 2:
+
 * Generalized Linear Model (GLM)
   * consider the distribution and response
   * training a GLM find coefficients that minimize the residual sum of squares (RSS)
@@ -84,7 +86,63 @@ Machine Learning Algorithmic Deep Dive
   * Super Learner == Stacking
     * set-up ensemble
     * train ensemble: k-cross fold validation for base learners
-  * R package(s): *SuperLearner*, *subsemble* faster alternative, *h20Ensemble* supports regression and binary classification 
+  * R package(s): *SuperLearner*, *subsemble* faster alternative, *h20Ensemble* supports regression and binary classification
+
+  _____
+
+Extracting data from the web APIs and beyond  
+  * [repo](https://github.com/ropensci/user2016-tutorial)
+  * Part 1: Collecting data from an API by Scott Chamberlain
+    * An API is programming instructions to interact with a piece of software
+    * Could be: software package, public web API, database
+    * REST (Representational State Transfer)
+    * HTTP (Hyper Text Transfer Protocol): verbs for different actions. HTTP is behind the scene. (i.e. install.packages() uses the download)
+    * Server: nginx, sql database; Client: httr in R
+    * httr example in R:
+
+    ```r
+    httr_exp <- httr::GET("https://www.google.com/")
+    str(httr_exp)
+    httr_exp$headers
+    ```
+
+    * HTTP verbs:
+      * GET => retrieve from Server. Identical to HEAD.
+        * base url, path, query parameter (everything after the ? symbol),
+      * POST => create
+        * body (JSON blob)
+      * PUT => update partial record
+        * base url, path
+      * DELETE => delete a record
+        * base url, path, empty body (don't get anything back)
+      * Components: URL, Method (what HTTP verb), Headers (any meta data to modify request), body (contains data)
+    * Exercise with http://httpbin.org/ - mismatch with verb method and url yields a 405 status code! You don't want arbitrary things to be changed on certain url's
+    * HTTP responses: the client sends back: status, headers, body/content. 3 digit numeric codes for status (1xx is information, 2xx is success, 3xx is redirection, 4xx is client error, 5xx server error). Servers do not always give correct codes!
+    * Exercise with status code numbers with https://httpstatusdogs.com/ or https://http.cat/
+    * headers: some are standardized, most headers are *key:value* pairs
+    * content/body: sometimes you get back raw bytes
+
+    ```r
+    x <- httr::GET(url="http://httpbin.org/get/405")
+    str(x)
+    x$status_code
+    y = httr::GET("http://httpbin.org/get/405", accept_json())
+
+    ```
+
+    * Data Formats: JSON, XML (uglier!) *xml2*
+
+    ```r
+    x = httr::GET("http://www.omdbapi.com/?t=veronica+mars&y=&plot=short&r=json")
+    content(x, as="text") # parse each format to text 
+
+    ```
+
+  * Part 2: Wrapping an API with R
+  * Part 3: Scraping data without an API
+
+
+
 
 
 ## Tuesday
