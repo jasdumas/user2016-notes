@@ -57,7 +57,7 @@ ____
   * "matrix inverse is not a good place to be at" - Erin LeDell
   * Gloss?  - link R to optimize basic core math to speed up glm's
   * Different solvers: Iteratively Re-weight Least squares with ADMM, Cyclical coordinate descent, Limited memory-BFGS optimization algorithm = butter knife approach
-  * GLM `predict()` error for finding new factors when applying fit to test data. It get encoded as not there
+  * GLM `predict()` error for finding new factors when applying fit to test data. It gets encoded as not there
   * Ridge Regression: constraints square sum of squares of beta coefficients
     * L2 regularization: useful for preventing overfitting
     * good for: little bit of noise
@@ -121,6 +121,7 @@ ____
     * content/body: sometimes you get back raw bytes
 
     ```r
+    library(httr)
     x <- httr::GET(url="http://httpbin.org/get/405")
     str(x)
     x$status_code
@@ -136,8 +137,67 @@ ____
 
     ```
 
-  * Part 2: Wrapping an API with R
-  * Part 3: Scraping data without an API
+  * Part 2: Wrapping an API with R by Karthik Ram
+    * Beer tap analogy: write a set of functions that can talk to each of the taps
+    * SWAPI: star wars data
+    * result from get method is just a print with response, date, staus code (200 is code), content type.
+
+    ```r
+    x <- httr::GET("api.randomuser.me")
+    x  # contains todays date, successful 200 status, json type and size
+
+    y <- httr::GET("http://api.openweathermap.org/data/2.5/forecast?id=524901")
+    y # todays date, bad 401 (user side) status, json type, size
+
+    ### pro trip
+    y$status_code # make sure you get a successful status code before contining
+    httr::stop_for_status(y)
+    ```
+
+    * extract content from a GET request `r httr::content(y)`. R can figure out what do do with it by associating a function with the content-type (read_html, read_xml, read_csv, ...). application/*json* (will is the operating system to had the type of data )
+    * Exercise with http://api.randomuser.me/ from https://randomuser.me/: When writing a R package look at the [documentation](https://randomuser.me/documentation)
+
+    ```r
+    request <- httr::GET("http://api.randomuser.me/")
+    person <- httr::content(request, as="parsed")
+    person # just a list needs to be put into a data.frame
+
+    ### modified with a query content
+    args = list(gender = "female", results = 5)
+    request <- httr::GET("http://api.randomuser.me/", query=args)
+    person <- httr::content(request, as="parsed")
+    length(person$results)
+    View(data.frame(t(unlist((person$results)))))
+    ```
+
+  * Part 3: Scraping data without an API by Garrett Grolemond
+    * How to get data from the web without and API and breaking the Terms of service?
+    * content is stored in HTML. HTML can be parsed in sub items of elements in a tree.
+    * Knowing which tags surround your data is the key to extracting. <a href="url">title</a> stands for *anchor*
+    * Finding source code for web pages!
+    * CSS selectors: understand the class (.class) and id (#id), tag (no prefix). "Stealing the language that the CSS uses"
+
+    ```css
+    span {
+      color: #fffff;
+    }
+    ```
+    * **Strategy**: extract info from HTML, identify info to extract from CSS selectors
+    * R Package: *rvest*
+      * pull in HTML file and turn it into XML file with `r read_html()`
+      * extract pieces of info out of nodes with `r html_nodes()` by interpreting the CSS selectors.
+      * extract content from nodes with `r html_text`, `r html_table`, `r html_name`, `r html_children`, `r html_attrs`.
+
+      ```r
+      library(rvest)
+      url <- "http://www.imdb.com/title/tt2294629/"
+      frozen <- read_html(url)
+      str(frozen)
+      cast <- html_nodes(frozen, ".itemprop .itemprop")
+      html_text(cast)
+      ```
+
+      * selectorGadget: vignette("selectorgadget") - help find the correct CSS selector.
 
 
 
