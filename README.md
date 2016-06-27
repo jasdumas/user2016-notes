@@ -13,8 +13,7 @@ ____
 
 ## Monday
 
-Machine Learning Algorithmic Deep Dive
-* [repo](https://github.com/ledell/useR-machine-learning-tutorial)
+### Machine Learning Algorithmic Deep Dive | [repo](https://github.com/ledell/useR-machine-learning-tutorial)
 * Leg 1: Decision trees, Random Forest, GBM
   * Install R kernal from Terminal not RStudio
   * Practical topics related to each of the algorithms:
@@ -90,8 +89,7 @@ Machine Learning Algorithmic Deep Dive
 
   _____
 
-Extracting data from the web APIs and beyond  
-  * [repo](https://github.com/ropensci/user2016-tutorial)
+### Extracting data from the web APIs and beyond | [repo](https://github.com/ropensci/user2016-tutorial)
   * Part 1: Collecting data from an API by Scott Chamberlain
     * An API is programming instructions to interact with a piece of software
     * Could be: software package, public web API, database
@@ -134,7 +132,7 @@ Extracting data from the web APIs and beyond
 
     ```r
     x = httr::GET("http://www.omdbapi.com/?t=veronica+mars&y=&plot=short&r=json")
-    content(x, as="text") # parse each format to text 
+    content(x, as="text") # parse each format to text
 
     ```
 
