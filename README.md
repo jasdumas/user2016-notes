@@ -154,7 +154,7 @@ ____
     httr::stop_for_status(y)
     ```
 
-    * extract content from a GET request `r httr::content(y)`. R can figure out what do do with it by associating a function with the content-type (read_html, read_xml, read_csv, ...). application/*json* (will is the operating system to had the type of data )
+    * extract content from a GET request `httr::content(y)`. R can figure out what do do with it by associating a function with the content-type (read_html, read_xml, read_csv, ...). application/*json* (will is the operating system to had the type of data )
     * Exercise with http://api.randomuser.me/ from https://randomuser.me/: When writing a R package look at the [documentation](https://randomuser.me/documentation)
 
     ```r
@@ -184,9 +184,9 @@ ____
     ```
     * **Strategy**: extract info from HTML, identify info to extract from CSS selectors
     * R Package: *rvest*
-      * pull in HTML file and turn it into XML file with `r read_html()`
-      * extract pieces of info out of nodes with `r html_nodes()` by interpreting the CSS selectors.
-      * extract content from nodes with `r html_text`, `r html_table`, `r html_name`, `r html_children`, `r html_attrs`.
+      * pull in HTML file and turn it into XML file with `read_html()`
+      * extract pieces of info out of nodes with `html_nodes()` by interpreting the CSS selectors.
+      * extract content from nodes with `html_text`, `html_table`, `html_name`, `html_children`, `html_attrs`.
 
       ```r
       library(rvest)
