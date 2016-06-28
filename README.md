@@ -5,9 +5,13 @@ The R User Conference 2016
 Monday, June 27 - Thursday, June 30 2016      
 Stanford University, Stanford, California     
 
-## Links     
+![](https://raw.githubusercontent.com/user2016/user2016.github.io/master/images/user2016/608x300.png)
+
+## Important Links     
 * Twitter hashtag: [#useR2016](https://twitter.com/hashtag/useR2016?src=hash)
 * [Full Schedule](http://schedule.user2016.org/)
+* [Book of Abstracts](http://user2016.org/files/abs-book.pdf)
+* [Live stream](https://aka.ms/user2016conference)
 
 ____
 
