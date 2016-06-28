@@ -74,8 +74,8 @@ ____
   * HOGWILD! method
   * difficult to know architecture structure up front -> parameter tune which is difficult (activation, regularization, drop-out)
   * multilayer perception or feed-forward artificial neural networks (ANN)
-  * recurrent neural networks (RNN) has internal memory. good for: sequence learners (i.e. bots on twitter)
-  * convolution neural networks (CNN): good for images. (i.e. trippy images from google!)
+  * recurrent neural networks (RNN) has internal memory. good for: sequence learners (i.e. [bots on twitter](http://www.theverge.com/2016/3/24/11297050/tay-microsoft-chatbot-racist))
+  * convolution neural networks (CNN): good for images. (i.e. [trippy images from google!](http://1.bp.blogspot.com/-XZ0i0zXOhQk/VYIXdyIL9kI/AAAAAAAAAmQ/UbA6j41w28o/s1600/building-dreams.png))
   * R package(s): *mxnet* has GPU support and can have specified output, *h20* has support for exponential families.
 
 * DO EVERYTHING: Stacking
@@ -140,7 +140,7 @@ ____
   * Part 2: Wrapping an API with R by Karthik Ram
     * Beer tap analogy: write a set of functions that can talk to each of the taps
     * SWAPI: star wars data
-    * result from get method is just a print with response, date, staus code (200 is code), content type.
+    * result from get method is just a print with response, date, status code (200 is code), content type.
 
     ```r
     x <- httr::GET("api.randomuser.me")
