@@ -204,11 +204,59 @@ ____
       * selectorGadget: vignette("selectorgadget") - help find the correct CSS selector.
 
 
-
-
-
 ## Tuesday
 
+Things I attended: [trackeR: Intrastructure for running and cycling data from GPS-enabled tracking devices in R](https://user2016.sched.org/event/7BZD), [jailbreakr: Get out of Excel, free](http://schedule.user2016.org/event/7BRD/jailbreakr-get-out-of-excel-free), [transforming a museum to be data-driven](http://schedule.user2016.org/event/7BYj/transforming-a-museum-to-be-data-driven-using-r), [xgboost](http://schedule.user2016.org/event/7BZx/xgboost-an-r-package-for-fast-and-accurate-gradient-boosting), [Rent Zestimate at Zillow](http://schedule.user2016.org/event/7BYg/inside-the-rent-zestimates), [Interactive Naive Bayes using Shiny: Text Retrieval, Classification, Quantification](http://schedule.user2016.org/event/7BZw/interactive-naive-bayes-using-shiny-text-retrieval-classification-quantification)
+
 ## Wednesday
+
+keynote: Towards a grammar of interactive graphics by Hadley Wickham |
+
+![](http://r4ds.had.co.nz/diagrams/data-science.png)
+[Source](http://r4ds.had.co.nz/intro.html)
+
+* Uniform Data structures:
+  * tidy: put into a data frame
+  * [**List-Columns!**](http://r4ds.had.co.nz/many-models.html)
+    * good for spatial polygon objects so that features only have to be described once in a row, instead of as a new obervation for each point in the spatial object
+  * [tibble package](https://github.com/hadley/tibble)
+  * R has partial name matching
+
+  ```r
+  df = data.frame(xyz = "a")
+  df$x # returns the first column as a factor
+  ```
+  * tidyr package: better to use search grid functionality for modeling parameters
+  * polynomial models are *great* for interpreting but *bad* for extrapolating.
+
+* Uniform APIs
+  * want functions to work together across packages
+  * Process is:
+    * Take one step at a time when writing functions and only *really* write specialized functions that do one thing really well
+    * Compose with pipes which is a easier way of viewing nested functions
+    * Support [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency)
+  * Functions should be like shipping containers and legos
+  * Pure Function concepts:
+    * **output only depends on input**
+    * **does not change the world/environment**
+    * Impure function examples: `plot()`, `par()`, `Sys.time()`, any random number generator `rnorm()`
+    * When designing functions either make them pure or *impure and proud*
+    * simple function = atom => `%>%` is the molecular bond
+    * the pipe is: designed for humans, optional, provides consistency across packages
+    * Non-standard evaluation (indirectly references data frames and columns)
+    * `dplyr` is hard to write functions on
+    * formulas allow NSE with referential transparency
+
+    `x <- ~cyl == 8`
+
+    * tidyverse not hadleyverse
+      * = tidy data + tidy APIs
+    * `$` is for interactive and `[[]]` is for programatic approaches
+    * R package(s): *ggstat* is designed to pull out features for further analysis from ggplot2 (i.e. smoothing line), *ggvis* uses `%>%`, [`lazyeval`](http://rpubs.com/hadley/lazyeval)
+
+
+Things I attended: [MAVIS: meta analysis via shiny](http://schedule.user2016.org/event/7BXX/mavis-meta-analysis-via-shiny), [On the emergence of R as a platform for emergency outbreak response](http://schedule.user2016.org/event/7BZk/on-the-emergence-of-r-as-a-platform-for-emergency-outbreak-response), [Classifying Murderers in Imbalanced Data Using randomForest](http://schedule.user2016.org/event/7Ba7/classifying-murderhellip), [Tools for Robust R Packages](https://user2016.sched.org/event/7BZz), [Adding R, Jupyter and Spark to the toolset for understanding the complex computing systems at CERN's Large Hadron Collider](https://user2016.sched.org/event/7BZP), [How to do one's taxes with R](http://sched.co/7Ba2)
+
+
 
 ## Thursday
