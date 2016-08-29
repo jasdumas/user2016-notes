@@ -53,7 +53,7 @@ ____
   * GBM trees: should be "shrubs" or "stumps" aka shorter trees than Random Forest.
   * R package(s): *gbm*, *xgboost*
 
-* Leg 2:
+* Leg 2: GLM, DNN, Stacking
 
 * Generalized Linear Model (GLM)
   * consider the distribution and response
@@ -210,7 +210,7 @@ Things I attended: [trackeR: Intrastructure for running and cycling data from GP
 
 ## Wednesday
 
-keynote: Towards a grammar of interactive graphics by Hadley Wickham |
+keynote: Towards a grammar of interactive graphics by Hadley Wickham | [Video Recording](https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Towards-a-grammar-of-interactive-graphics)
 
 ![](http://r4ds.had.co.nz/diagrams/data-science.png)
 [Source](http://r4ds.had.co.nz/intro.html)
